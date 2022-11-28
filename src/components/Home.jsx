@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { API_URI } from "../API_Auth";
 import { CaretRight, Trash, PencilLine, Plus } from "phosphor-react";
 import AddList from "./AddList";
+import UpdateList from "./UpdateList";
 
 const Home = () => {
   const [list, setList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [updateList, setUpdateList] = useState([]);
+  const [updateTitle, setUpdateTitle] = useState("");
+  const [updateDetails, setUpdateDetails] = useState("");
 
   useEffect(() => {
     fetch(API_URI)
@@ -20,9 +25,28 @@ const Home = () => {
     setOpenModal(modalOpen);
   };
 
+  const updateClick = (i) => {
+    setOpenUpdateModal(true);
+    setUpdateList(i);
+    setUpdateTitle(i.Title);
+    setUpdateDetails(i.Details);
+    console.log(i);
+  };
+
   const addClick = (e) => {
     e.preventDefault();
     setOpenModal(true);
+  };
+
+  const deleteClick = (i) => {
+    fetch(API_URI + i.TableId, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    window.location.reload();
   };
   return (
     <div>
@@ -41,10 +65,16 @@ const Home = () => {
                   <button className="btn-open">
                     <CaretRight size={32} color={"white"} />
                   </button>
-                  <button className="btn-edit">
+                  <button
+                    className="btn-edit"
+                    onClick={() => updateClick(items)}
+                  >
                     <PencilLine size={32} color={"white"} />
                   </button>
-                  <button className="btn-delete">
+                  <button
+                    className="btn-delete"
+                    onClick={() => deleteClick(items)}
+                  >
                     <Trash size={32} color={"red"} />
                   </button>
                 </div>
@@ -58,6 +88,21 @@ const Home = () => {
         <div>
           <div className="overlay"></div>
           <AddList isOpen={setOpenModal} />
+        </div>
+      ) : (
+        ""
+      )}
+      {openUpdateModal === true ? (
+        <div>
+          <div className="overlay"></div>
+          <UpdateList
+            isOpen={setOpenUpdateModal}
+            updateData={updateList}
+            updateT={updateTitle}
+            updateD={updateDetails}
+            setupdateTitle={setUpdateTitle}
+            setupdateDetails={setUpdateDetails}
+          />
         </div>
       ) : (
         ""
