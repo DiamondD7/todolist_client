@@ -13,8 +13,14 @@
 }
 
 .header-introduction {
-  font-size: 48px;
+  font-size: 55px;
   margin: 70px 0 0 50px;
+  z-index: 2;
+}
+
+.whattodo-logo {
+  margin-left: 100px;
+  z-index: 1;
 }
 
 .card-container {

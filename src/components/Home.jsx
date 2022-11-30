@@ -3,6 +3,7 @@ import { API_URI } from "../API_Auth";
 import { CaretRight, Trash, PencilLine, Plus } from "phosphor-react";
 import AddList from "./AddList";
 import UpdateList from "./UpdateList";
+import whattodo from "../whattodo-icon.png";
 
 const Home = () => {
   const [list, setList] = useState([]);
@@ -57,8 +58,8 @@ const Home = () => {
               <Plus size={32} color={"#202020"} />
             </button>
             {list.map((items, index) => (
-              <div className="data-container">
-                <div className="sub-container" key={index}>
+              <div className="data-container" key={items.TableId}>
+                <div className="sub-container">
                   <h1>{items.Title}</h1>
                 </div>
                 <div className="btns-actions">
@@ -82,7 +83,9 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <h2 className="header-introduction">What are the plans for today?</h2>
+        <div>
+          <img className="whattodo-logo" src={whattodo} />
+        </div>
       </div>
       {openModal === true ? (
         <div>
@@ -95,14 +98,7 @@ const Home = () => {
       {openUpdateModal === true ? (
         <div>
           <div className="overlay"></div>
-          <UpdateList
-            isOpen={setOpenUpdateModal}
-            updateData={updateList}
-            updateT={updateTitle}
-            updateD={updateDetails}
-            setupdateTitle={setUpdateTitle}
-            setupdateDetails={setUpdateDetails}
-          />
+          <UpdateList isOpen={setOpenUpdateModal} updateData={updateList} />
         </div>
       ) : (
         ""
