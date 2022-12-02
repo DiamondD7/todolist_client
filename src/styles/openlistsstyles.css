@@ -1,0 +1,19 @@
+.openedData-container {
+  background-color: #e6e7ff;
+  margin: 20px 0 0 40px;
+  width: 900px;
+  height: 900px;
+
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.data-title {
+  font-size: 55px;
+  text-align: center;
+}
+
+.data-details {
+  padding-top: 30px;
+  font-size: 24px;
+}

@@ -1,1 +1,1 @@
-export const API_URI = "https://localhost:7285/api/Todolists/";
+export const API_URI = "https://todolistb.azurewebsites.net/api/Todolists/";
